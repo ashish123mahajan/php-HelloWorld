@@ -1,7 +1,8 @@
 <script>
-    function getById(){
-        var id=document.getElementById('id').value;
-        if(id.trim()==""){
+    function getData(url,data){
+        console.log(url)
+        
+        if(data.trim()==""){
             return;
         }
             var xhttp = new XMLHttpRequest();
@@ -10,28 +11,12 @@
         document.getElementById("data").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "getDataById.php?id="+id, true);
-    xhttp.send();
-    }
-
- function getByName(){
-        var name=document.getElementById('name').value;
-        if(name.trim()==""){
-            return;
-        }
-            var xhttp = new XMLHttpRequest();
-             xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
- 
-        document.getElementById("data").innerHTML = this.responseText;
-        }
-    };
-    xhttp.open("GET", "getDataByName.php?name="+name, true);
+    xhttp.open("GET",url+data, true);
     xhttp.send();
     }
 </script>
 
  
-<input type=text placeholder='Search by id' onkeyup="getById()" name='id' id='id'>
-<input type=text placeholder='Search by name' onkeyup="getByName()" name='name' id='name'>	
+<input type=text placeholder='Search by id' onkeyup="getData('getDataById.php?id=',this.value)" name='id' id='id'>
+<input type=text placeholder='Search by name' onkeyup="getData('getDataByName.php?name=',this.value)" name='name' id='name'>	
  <div id='data'></div>
